@@ -16,7 +16,7 @@ _This app is a simple calculator which can perform basic math functions._
 
 ## Known Bugs
 
-_Clear function and clear all function are currently the same_
+_No known bugs_
 
 ## Support and contact details
 

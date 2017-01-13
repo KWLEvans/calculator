@@ -94,9 +94,19 @@ $(function() {
 
   var submitFunction = {
     screenClear: function() {
+      var screenLength = full_equation.length - 1;
+      if (full_equation[screenLength] === " ") {
+        current_operator = "";
+        full_equation = full_equation.slice(0, -3);
+        last_screen = "";
+        overwrite = false;
+        just_operated = false;
+      } else {
+        full_equation = full_equation.slice(0, -current_screen.length);
+        current_screen = "";
+        just_operated = true;
+      }
       equals_operated = false;
-      full_equation = full_equation.slice(0, -(current_screen.length));
-      current_screen = "";
       setScreens();
     },
     clearAll: function() {
