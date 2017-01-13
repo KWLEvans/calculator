@@ -39,7 +39,7 @@ $(function() {
   var overwrite = false;
   var just_operated = false;
   var equals_operated = false;
-
+  var equals_repeated;
 
   function setScreens() {
     $("#main-screen").val(current_screen);
@@ -60,7 +60,6 @@ $(function() {
   }
 
   function performOperation(id, nextId) {
-    console.log("perform ops");
     current_screen = operators[id].perform(last_screen, current_screen);
     last_screen = current_screen;
     current_operator = nextId;
@@ -149,8 +148,15 @@ $(function() {
     },
     equals: function() {
       if (!just_operated || equals_operated) {
-        console.log("in if statement");
-        performOperation(current_operator, current_operator);
+        if (!just_operated) {
+          equals_repeated = current_screen;
+          current_screen = operators[current_operator].perform(last_screen, current_screen);
+        } else {
+          current_screen = operators[current_operator].perform(equals_repeated, current_screen);
+          full_equation += operators[current_operator].stringValue + " " + equals_repeated;
+        }
+        just_operated = true;
+        overwrite = true;
         equals_operated = true;
         setScreens();
       }
